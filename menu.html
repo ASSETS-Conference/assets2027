@@ -1,14 +1,19 @@
 <a href="index.html"
   ><picture id="nav-logo">
-    <source srcset="imgs/logo_horizontal-dark.svg" media="(prefers-color-scheme: dark)" />
-    <img src="imgs/logo_horizontal-light.svg" alt="Assets 2025 logo" /> </picture
+    <source srcset="imgs/logo.svg" media="(prefers-color-scheme: dark)" />
+    <img src="imgs/logo.svg" alt="Assets 2027 logo" /> </picture
 ></a>
-<button id="menu-toggle" aria-label="Toggle menu">
+<button
+  id="menu-toggle"
+  aria-label="Toggle navigation menu"
+  aria-expanded="false"
+  aria-controls="menu-container"
+>
   <span class="hamburger"></span>
 </button>
 <div id="menu-container">
   <ul class="main-menu">
-    <li class="mobile-only"><a href="index.html" data-page="home">Home</a></li>
+    <!-- <li class="mobile-only"><a href="index.html" data-page="home">Home</a></li> -->
     <li class="has-submenu">
       <a
         aria-expanded="false"
@@ -85,7 +90,11 @@
       </ul>
     </li>
     <li class="has-submenu">
-      <a href="about_sponsorship.html" aria-expanded="false" aria-haspopup="true" data-page="sponsors"
+      <a
+        href="about_sponsorship.html"
+        aria-expanded="false"
+        aria-haspopup="true"
+        data-page="sponsors"
         >Sponsors</a
       >
       <ul class="secondary-menu">

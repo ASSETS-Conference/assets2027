@@ -1,24 +1,37 @@
 // https://www.w3.org/WAI/tutorials/menus/flyout/#use-button-as-toggle
 
 var menuItems = document.querySelectorAll('li.has-submenu')
+var allTopMenuItems = document.querySelectorAll('.main-menu > li')
 
-// Iterate through each menu item
+// Close other submenus immediately when mouse enters any top-level menu item
+Array.prototype.forEach.call(allTopMenuItems, function (topItem) {
+  topItem.addEventListener('mouseenter', function () {
+    Array.prototype.forEach.call(menuItems, function (subItem) {
+      if (subItem !== topItem) {
+        subItem.classList.remove('open')
+        if (subItem.timer) {
+          clearTimeout(subItem.timer)
+          subItem.timer = null
+        }
+      }
+    })
+  })
+})
+
+// Iterate through each submenu item
 Array.prototype.forEach.call(menuItems, function (el, i) {
-  // Add an event listener for mouseover to add the 'open' class
-  el.addEventListener('mouseover', function (event) {
-    this.classList.add('open')
-    // Clear any existing timeout when mouse enters
+  el.addEventListener('mouseenter', function (event) {
     if (this.timer) {
       clearTimeout(this.timer)
       this.timer = null
     }
+    this.classList.add('open')
   })
 
-  // Add an event listener for mouseout to remove the 'open' class after 750ms
-  el.addEventListener('mouseout', function (event) {
+  el.addEventListener('mouseleave', function (event) {
     this.timer = setTimeout(() => {
       this.classList.remove('open')
-    }, 750)
+    }, 120)
   })
 
   // Add an event listener to the <a> element to toggle submenu visibility when clicked
@@ -61,17 +74,40 @@ Array.prototype.forEach.call(menuItems, function (el, i) {
   })
 })
 
-document.getElementById('menu-toggle').addEventListener('click', function () {
-  const menuContainer = document.getElementById('menu-container')
-  menuContainer.classList.toggle('open')
-  this.classList.toggle('active')
-  document.body.classList.toggle('menu-open')
-  document.body.style.overflow = document.body.classList.contains('menu-open') ? 'hidden' : ''
-})
+var menuToggle = document.getElementById('menu-toggle')
+if (menuToggle) {
+  menuToggle.addEventListener('click', function () {
+    const menuContainer = document.getElementById('menu-container')
+    const isOpen = menuContainer.classList.toggle('open')
+    this.classList.toggle('active', isOpen)
+    this.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
+    document.body.classList.toggle('menu-open', isOpen)
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+  })
 
-// closes open submenus on escape key press
+  menuToggle.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      this.click()
+    }
+  })
+}
+
+// Closes open submenus on escape key press
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
+    const toggleBtn = document.getElementById('menu-toggle')
+    const menuCont = document.getElementById('menu-container')
+    if (menuCont && menuCont.classList.contains('open')) {
+      menuCont.classList.remove('open')
+      if (toggleBtn) {
+        toggleBtn.classList.remove('active')
+        toggleBtn.setAttribute('aria-expanded', 'false')
+        toggleBtn.focus()
+      }
+      document.body.classList.remove('menu-open')
+      document.body.style.overflow = ''
+    }
     document.querySelectorAll('.has-submenu.open').forEach(function (menu) {
       menu.classList.remove('open')
       const link = menu.querySelector('a')
@@ -81,3 +117,28 @@ document.addEventListener('keydown', function (e) {
     })
   }
 })
+
+// Automatically sync navigation state with 1200px breakpoint:
+// Close open mobile menu when expanding to desktop viewport (> 1200px)
+const desktopNavQuery = window.matchMedia('(min-width: 1201px)')
+function handleNavBreakpointChange(e) {
+  if (e.matches) {
+    const toggleBtn = document.getElementById('menu-toggle')
+    const menuCont = document.getElementById('menu-container')
+    if (menuCont && menuCont.classList.contains('open')) {
+      menuCont.classList.remove('open')
+      if (toggleBtn) {
+        toggleBtn.classList.remove('active')
+        toggleBtn.setAttribute('aria-expanded', 'false')
+      }
+      document.body.classList.remove('menu-open')
+      document.body.style.overflow = ''
+    }
+  }
+}
+if (desktopNavQuery.addEventListener) {
+  desktopNavQuery.addEventListener('change', handleNavBreakpointChange)
+} else if (desktopNavQuery.addListener) {
+  desktopNavQuery.addListener(handleNavBreakpointChange)
+}
+

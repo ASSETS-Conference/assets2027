@@ -10,7 +10,10 @@
 fetch('footer.html')
   .then((response) => response.text())
   .then((html) => {
-    document.getElementById('footer-container').innerHTML = html
+    const fc = document.getElementById('footer-container');
+    if (fc && !fc.children.length) {
+      fc.innerHTML = html;
+    }
   })
 
 fetch('menu.html')
@@ -28,6 +31,10 @@ fetch('menu.html')
     const script = document.createElement('script')
     script.src = 'menu.js'
     document.body.appendChild(script)
+
+    const patternScript = document.createElement('script')
+    patternScript.src = 'pattern.js'
+    document.body.appendChild(patternScript)
   })
 
 /*
