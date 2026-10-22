@@ -21,7 +21,7 @@
   --content-width: 1600px;
   --day-header-height: 2rem;
 
-  /* Seigaiha (Japanese wave) background pattern */
+  /* Decorative background pattern */
   --arch-scale: 1;
   --row-step: 50%;
   --pattern-opacity: 0.1;
@@ -75,6 +75,8 @@ body {
   color: var(--text-color);
   font-family: 'Atkinson Hyperlegible', sans-serif;
   font-optical-sizing: auto;
+  /* auto (not reset.css's 100%) so the viewport scrolls, not body */
+  height: auto;
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
@@ -98,7 +100,7 @@ main {
   flex: 1;
 }
 
-/* All sections transparent so seigaiha pattern shows continuously across the full page */
+/* All sections transparent so background pattern shows continuously across the full page */
 main,
 .title-row-container,
 .title-row,
@@ -112,8 +114,8 @@ main,
   background-color: transparent !important;
 }
 
-/* ── Seigaiha (Japanese wave) background pattern ── */
-#seigaiha-pattern {
+/* ── Decorative background pattern ── */
+#bg-pattern {
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -137,7 +139,7 @@ main,
     scroll-behavior: auto !important;
   }
 
-  #seigaiha-pattern {
+  #bg-pattern {
     animation: none !important;
     transition: none !important;
   }
@@ -810,16 +812,6 @@ h1 {
   text-align: right;
 }
 
-/* Decorative sakura branch sitting above Tokyo/Japan text */
-.sakura-near-header {
-  width: clamp(140px, 55%, 280px);
-  height: auto;
-  pointer-events: none;
-  /* align to the right edge, matching the container's right-aligned layout */
-  align-self: flex-end;
-  margin-bottom: -0.5rem; /* tuck slightly closer to the heading below */
-}
-
 .event-info-container .event-info,
 h2.event-info,
 .event-info {
@@ -1049,7 +1041,7 @@ ul + p {
   outline-offset: 3px;
 }
 
-/* Venue pill button under Tokyo, Japan */
+/* Venue pill button under event location text */
 .venue-pill-btn {
   display: inline-flex;
   align-items: center;
