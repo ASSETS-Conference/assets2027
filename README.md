@@ -1,7 +1,7 @@
 # ASSETS2026
-This repo holds the ASSETS2026 website:
-- Test server: [https://assets-conference.github.io/assets2026/](https://assets-conference.github.io/assets2026/)
-- Production server: [https://assets26.sigaccess.org/](https://assets26.sigaccess.org/)
+This repo holds the ASSETS2027 website:
+- Test server: [https://assets-conference.github.io/assets2027/](https://assets-conference.github.io/assets2027/)
+- Production server: [https://assets27.sigaccess.org/](https://assets27.sigaccess.org/)
 
 ## Running Locally
 
