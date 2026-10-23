@@ -170,6 +170,12 @@ nav {
   }
 }
 
+/* Footer nav is plain text on the footer background, not a menu bar */
+footer nav {
+  background-color: transparent;
+  box-shadow: none;
+}
+
 nav > a:first-child {
   display: flex;
   align-self: flex-start;
@@ -3973,5 +3979,40 @@ footer a:focus-visible,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Navy dark mode (opt-in per page with <html class="theme-navy">)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  html.theme-navy {
+    --bg-color: #072436;
+    --text-color: #eef5f8;
+    --accent-color2: #9ed0e6;
+    --nav-bg-color: #031824;
+    --footer-color: #031824;
+    --light-text: #eef5f8;
+
+    /* Text boxes: a lifted blue panel instead of beige */
+    --box-bg: #0f3d55;
+    --box-text-color: #eef5f8;
+
+    /* Light pattern lines so the arches stay visible on navy */
+    --pattern-line-color: #bfe3f0;
+    --pattern-opacity: 0.14;
+  }
+
+  html.theme-navy .site-header {
+    background-color: var(--nav-bg-color);
+  }
+
+  html.theme-navy .main-description-box {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  html.theme-navy a:focus-visible {
+    outline-color: #ffffff;
   }
 }

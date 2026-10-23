@@ -64,6 +64,20 @@
       // Background color
       const bgColor = computed.getPropertyValue('--bg-color').trim() || '#f6deb8'
 
+      // Optional --pattern-line-color recolors the lines (e.g. light lines in dark mode)
+      const lineColor = computed.getPropertyValue('--pattern-line-color').trim()
+      let lineImg = baseImg
+      if (lineColor) {
+        lineImg = document.createElement('canvas')
+        lineImg.width = naturalWidth
+        lineImg.height = naturalHeight
+        const lineCtx = lineImg.getContext('2d')
+        lineCtx.drawImage(baseImg, 0, 0)
+        lineCtx.globalCompositeOperation = 'source-in'
+        lineCtx.fillStyle = lineColor
+        lineCtx.fillRect(0, 0, naturalWidth, naturalHeight)
+      }
+
       // Create offscreen canvas for the repeating tile
       const canvas = document.createElement('canvas')
       canvas.width = tileW
@@ -101,7 +115,7 @@
 
         // 3. Draw pattern lines with reduced opacity
         ctx.globalAlpha = patternOpacity
-        ctx.drawImage(baseImg, x, y, archWidth, archHeight)
+        ctx.drawImage(lineImg, x, y, archWidth, archHeight)
 
         ctx.restore()
       }
