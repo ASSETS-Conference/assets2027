@@ -15,20 +15,21 @@
     <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-assets.png" />
     <!-- Preload stylesheets -->
     <link rel="preload" href="reset.css" as="style" />
-    <link rel="preload" href="styles.css?v=18" as="style" />
+    <link rel="preload" href="styles.css?v=19" as="style" />
 
     <!-- Load stylesheets -->
     <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="styles.css?v=18" />
+    <link rel="stylesheet" href="styles.css?v=19" />
 
     <script
       defer
       src="https://cloud.umami.is/script.js"
       data-website-id="e2f681f9-0ef5-4e7c-98b9-e3f2316e9125"
     ></script>
-    <script src="pattern.js" defer></script>
+    <script src="pattern.js?v=2" defer></script>
   </head>
-  <body>
+  <!-- TBA MODE: remove "tba-mode" from body to restore header, full landing content and footer -->
+  <body class="tba-mode">
     <div id="page-wrapper" class="page-wrapper">
       <header class="site-header">
         <a href="index.html"
@@ -38,6 +39,16 @@
         ></a>
       </header>
       <main id="main-content">
+        <!-- "To be announced" placeholder, only shown in TBA mode -->
+        <section class="tba-hero" aria-labelledby="tba-title">
+          <h1 id="tba-title" class="tba-title">
+            ASSETS 2027<span class="sr-only">: the 29th International ACM SIGACCESS Conference on Computers and Accessibility</span>
+          </h1>
+          <p class="tba-subtitle">To be announced</p>
+        </section>
+
+        <!-- Full landing content, hidden in TBA mode -->
+        <div class="landing-full">
         <!-- Title Row lining up with header logo and side padding -->
         <div class="title-row-container">
           <div class="title-row">
@@ -77,6 +88,7 @@
             </div>
           </div>
         </section>
+        </div>
       </main>
 
       <div id="footer-container">

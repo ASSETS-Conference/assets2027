@@ -4016,3 +4016,51 @@ footer a:focus-visible,
     outline-color: #ffffff;
   }
 }
+
+/* ==========================================================================
+   TBA mode (<body class="tba-mode">): only the background, "ASSETS 2027"
+   and "To be announced". Remove the class to restore the full landing page.
+   ========================================================================== */
+
+body.tba-mode .site-header,
+body.tba-mode #footer-container,
+body.tba-mode .landing-full {
+  display: none;
+}
+
+.tba-hero {
+  display: none;
+}
+
+body.tba-mode .tba-hero {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 2rem max(1rem, 4vw);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.tba-title {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 11vw, 10rem);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--accent-color2, #013950);
+  margin: 0;
+}
+
+.tba-subtitle {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.25rem, 5vw, 3rem);
+  line-height: 1.2;
+  color: var(--accent-color2, #013950);
+  margin: clamp(0.75rem, 2vw, 1.5rem) 0 0;
+  padding: 0;
+}

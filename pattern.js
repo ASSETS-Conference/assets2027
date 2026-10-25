@@ -9,7 +9,8 @@
  * - Seamless repeating tile: width = archWidth, height = 2 * rowStep
  * - Element styles: position: absolute; inset: 0; z-index: -1; pointer-events: none;
  * - No height measuring, no ResizeObserver
- * - Redraws on resize ONLY if --arch-scale changes at mobile breakpoint (debounced)
+ * - Canvas is rendered at devicePixelRatio (max 3) so the pattern stays sharp on phones
+ * - Redraws on resize ONLY if --arch-scale or devicePixelRatio changes (debounced)
  */
 ;(function () {
   if (window.__bgPatternInitialized) return
@@ -36,6 +37,11 @@
     let naturalWidth = 0
     let naturalHeight = 0
     let currentArchScale = null
+    let currentDpr = null
+
+    function getDpr() {
+      return Math.min(window.devicePixelRatio || 1, 3)
+    }
 
     function renderTile() {
       if (!container || !naturalWidth || !naturalHeight) return
@@ -78,12 +84,18 @@
         lineCtx.fillRect(0, 0, naturalWidth, naturalHeight)
       }
 
-      // Create offscreen canvas for the repeating tile
+      // Create offscreen canvas for the repeating tile, at device resolution
+      const dpr = getDpr()
+      currentDpr = dpr
       const canvas = document.createElement('canvas')
-      canvas.width = tileW
-      canvas.height = tileH
+      canvas.width = Math.round(tileW * dpr)
+      canvas.height = Math.round(tileH * dpr)
       const ctx = canvas.getContext('2d')
       if (!ctx) return
+      // Draw in CSS pixels; backgroundSize below maps the canvas back to tileW x tileH
+      ctx.scale(canvas.width / tileW, canvas.height / tileH)
+      ctx.imageSmoothingEnabled = true
+      ctx.imageSmoothingQuality = 'high'
 
       // Solid background fill matching --bg-color
       ctx.fillStyle = bgColor
@@ -172,7 +184,8 @@
       }
     }
 
-    // Redraw tile on resize ONLY if --arch-scale changes at mobile breakpoint (debounced)
+    // Redraw tile on resize ONLY if --arch-scale or devicePixelRatio changes (debounced)
+    // (DPR changes on browser zoom or moving to another monitor)
     // No ResizeObserver, no height measuring
     let resizeTimer = null
     window.addEventListener('resize', function () {
@@ -181,7 +194,7 @@
         const computed = window.getComputedStyle(document.documentElement)
         let scale = parseFloat(computed.getPropertyValue('--arch-scale'))
         if (isNaN(scale) || scale <= 0) scale = 1
-        if (scale !== currentArchScale) {
+        if (scale !== currentArchScale || getDpr() !== currentDpr) {
           renderTile()
         }
       }, 100)
