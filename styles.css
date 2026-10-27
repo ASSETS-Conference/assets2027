@@ -3597,50 +3597,6 @@ svg {
   max-width: 100%;
 }
 
-/* Logo-only landing page header, padded like .title-row-container */
-.site-header {
-  --menu-height: 4.5rem;
-
-  position: relative;
-  z-index: 50;
-  min-height: var(--menu-height);
-  padding: 0 max(2rem, 4vw);
-  box-sizing: border-box;
-  background-color: var(--nav-bg-color);
-  box-shadow: 0 4px 24px 0 rgba(1, 57, 80, 0.35);
-}
-
-.site-header > a {
-  display: flex;
-  width: fit-content;
-  height: var(--menu-height);
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  .site-header {
-    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.4);
-    background-color: #1a1f2b;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .site-header {
-    --menu-height: 3.75rem;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .site-header {
-    padding: 0 max(1rem, 3vw);
-  }
-}
-
-/* Landing page has no footer illustration to overlap */
-.landing-footer {
-  margin-top: 0 !important;
-}
-
 /* Text read by screen readers but not shown on screen */
 .sr-only {
   position: absolute;
@@ -3654,8 +3610,8 @@ svg {
   border: 0;
 }
 
-/* Keep the lone footer link at least 24px tall (WCAG 2.5.8 target size) */
-.landing-footer .footer-menu a {
+/* Keep footer links at least 24px tall (WCAG 2.5.8 target size) */
+.footer-menu a {
   display: inline-flex;
   align-items: center;
   min-height: 24px;
@@ -3752,7 +3708,7 @@ h2.event-info {
   }
 }
 
-/* Full width panorama section */
+/* Full width panorama section with venue button */
 .panorama-section {
   width: 100%;
   position: relative;
@@ -3772,6 +3728,48 @@ h2.event-info {
   display: block;
 }
 
+/* 'Check out the venue' button: 5px radius, overlapping top right on desktop */
+.venue-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #003b4f;
+  color: #ffffff !important;
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  height: 64px;
+  padding: 0 2.4rem 0 2rem;
+  border-radius: 5px;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(0, 59, 79, 0.3);
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.venue-btn:hover {
+  background-color: #002836;
+  color: #ffffff !important;
+  transform: translateY(calc(-50% - 2px));
+  box-shadow: 0 6px 18px rgba(0, 59, 79, 0.45);
+}
+
+.venue-btn:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: -3px;
+  box-shadow:
+    0 0 0 3px #003b4f,
+    0 0 0 6px #ffffff;
+}
+
 @media only screen and (max-width: 700px) {
   .panorama-section {
     margin-bottom: 32px;
@@ -3781,16 +3779,37 @@ h2.event-info {
     min-height: 220px;
     height: 220px;
   }
+
+  .venue-btn {
+    position: static;
+    transform: none;
+    margin: 1rem auto 0 auto;
+    border-radius: 5px;
+    min-height: 44px;
+    height: 48px;
+    padding: 0 1.8rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: calc(100% - 2rem);
+  }
+
+  .venue-btn:hover {
+    transform: translateY(-2px);
+  }
 }
 
-/* Section wrapping the description box */
+/* Section wrapping Description Box and Footer Illustration as background layer */
 .description-footer-section {
   position: relative;
   overflow: hidden;
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
-  padding-bottom: 0;
+  /* Room for the visible top part of the footer illustration */
+  padding-bottom: calc(100% * (1080 / 1920) * 0.25);
   box-sizing: border-box;
 }
 
@@ -3802,7 +3821,7 @@ h2.event-info {
   padding-left: max(2rem, 4vw);
   padding-right: max(2rem, 4vw);
   box-sizing: border-box;
-  margin-bottom: 56px;
+  margin-bottom: calc(var(--footer-overlap) + 32px);
 }
 
 @media only screen and (max-width: 900px) {
@@ -3875,15 +3894,38 @@ h2.event-info {
   padding: 0;
 }
 
+/* Decorative footer illustration as background layer on desktop */
+.footer-illustration-bg,
+.footer-illustration-bg img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.footer-illustration-bg img {
+  position: static;
+}
+
 @media only screen and (max-width: 900px) {
   .description-footer-section {
+    padding-bottom: 0;
     overflow: visible;
   }
 
   .description-box-container {
     padding-left: clamp(16px, 4vw, 24px);
     padding-right: clamp(16px, 4vw, 24px);
-    margin-bottom: 32px;
+    margin-bottom: 0;
+  }
+
+  .footer-illustration-bg {
+    position: relative;
+    margin-top: -14vw;
   }
 
   .main-description-box {
@@ -3957,7 +3999,31 @@ footer {
    Accessibility Utilities (WCAG 2.2 AA)
    ========================================================================== */
 
-/* Main focus outline reset */
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--nav-bg-color, #013950);
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 2px solid #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 1rem;
+  outline: 3px solid #f6deb8;
+  outline-offset: 2px;
+}
+
+/* Main focus outline reset when activated by skip link */
 main:focus {
   outline: none;
 }
@@ -3970,8 +4036,7 @@ button:focus-visible {
 }
 
 footer a:focus-visible,
-#nav-container a:focus-visible,
-.site-header a:focus-visible {
+#nav-container a:focus-visible {
   outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
@@ -3989,11 +4054,11 @@ footer a:focus-visible,
 }
 
 /* ==========================================================================
-   Navy dark mode (opt-in per page with <html class="theme-navy">)
+   Navy dark mode (all pages; overrides the earlier generic dark values)
    ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
-  html.theme-navy {
+  :root {
     --bg-color: #072436;
     --text-color: #eef5f8;
     --accent-color2: #9ed0e6;
@@ -4010,16 +4075,26 @@ footer a:focus-visible,
     --pattern-opacity: 0.14;
   }
 
-  html.theme-navy .site-header {
+  nav {
     background-color: var(--nav-bg-color);
   }
 
-  html.theme-navy .main-description-box {
+  .main-description-box {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
   }
 
-  html.theme-navy a:focus-visible {
+  a:focus-visible {
     outline-color: #ffffff;
+  }
+
+  .venue-btn {
+    background-color: var(--box-bg);
+    border: 2px solid var(--accent-color2);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  }
+
+  .venue-btn:hover {
+    background-color: #155070;
   }
 }
 
@@ -4028,7 +4103,8 @@ footer a:focus-visible,
    and "To be announced". Remove the class to restore the full landing page.
    ========================================================================== */
 
-body.tba-mode .site-header,
+body.tba-mode .skip-link,
+body.tba-mode #nav-container,
 body.tba-mode #footer-container,
 body.tba-mode .landing-full {
   display: none;
