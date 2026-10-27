@@ -15,11 +15,11 @@
     <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-assets.png" />
     <!-- Preload stylesheets -->
     <link rel="preload" href="reset.css" as="style" />
-    <link rel="preload" href="styles.css?v=20" as="style" />
+    <link rel="preload" href="styles.css?v=22" as="style" />
 
     <!-- Load stylesheets -->
     <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="styles.css?v=20" />
+    <link rel="stylesheet" href="styles.css?v=22" />
 
     <link rel="preload" href="setup.js?v=COMMIT_HASH" as="script" />
     <script src="setup.js?v=COMMIT_HASH" defer></script>
@@ -67,13 +67,20 @@
         <!-- Section wrapping Description Box and Footer Illustration as background layer -->
         <section class="description-footer-section">
           <div class="description-box-container">
-            <div id="announcement-block" class="highlighted-block" role="region" aria-labelledby="announcement-title">
-              <h3 id="announcement-title">Join us in organizing ASSETS 2027!</h3>
-              <p>
-                We're looking for volunteers to help organize ASSETS 2027. If you're interested in
-                getting involved, please fill out our
-                <a href="https://docs.google.com/forms/d/1obDXB_0xKciTlPMm4JKiCPWAVxtRcmlYj7gyxSd_ehU/viewform">interest form</a>.
-              </p>
+            <!-- Volunteer announcement with its button overlapping the box's bottom-right edge -->
+            <div class="announcement-wrapper">
+              <div id="announcement-block" role="region" aria-labelledby="announcement-title">
+                <h3 id="announcement-title">Join us in organizing ASSETS 2027!</h3>
+                <p>
+                  We're looking for volunteers to help organize ASSETS 2027. If you're interested in
+                  getting involved, please fill out our interest form.
+                </p>
+              </div>
+              <a
+                href="https://forms.gle/bsVBwxasC1eGPJSK9"
+                class="venue-btn interest-btn"
+                >Fill out the interest form</a
+              >
             </div>
 
             <!-- Main description box -->
@@ -103,8 +110,57 @@
         </div>
       </main>
 
+      <!-- Previous versions, kept for reference (replaced, not deleted):
+
+      Inline analytics script, now loaded by setup.js:
+      <script
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id="e2f681f9-0ef5-4e7c-98b9-e3f2316e9125"
+      ></script>
+
+      Logo-only header used in TBA mode, now the shared menu (menu.html):
+      <header class="site-header">
+        <a href="index.html"
+          ><picture id="nav-logo">
+            <source srcset="imgs/logo.svg" media="(prefers-color-scheme: dark)" />
+            <img src="imgs/logo.svg" alt="ASSETS 2027, home" /> </picture
+        ></a>
+      </header>
+
+      Volunteer announcement with the interest form as an inline link, now a button:
+      <div id="announcement-block" class="highlighted-block" role="region" aria-labelledby="announcement-title">
+        <h3 id="announcement-title">Join us in organizing ASSETS 2027!</h3>
+        <p>
+          We're looking for volunteers to help organize ASSETS 2027. If you're interested in
+          getting involved, please fill out our
+          <a href="https://forms.gle/bsVBwxasC1eGPJSK9">interest form</a>.
+        </p>
+      </div>
+
+      Landing-page footer with only Home, now the shared footer (footer.html):
+      <footer class="landing-footer">
+        <div class="content-block-container">
+          <div class="grid-helper">
+            <picture class="grid-item">
+              <source srcset="imgs/logo.svg" media="(prefers-color-scheme: dark)" />
+              <img src="imgs/logo.svg" alt="ASSETS 2027" />
+            </picture>
+            <hr class="span12c grid-item" />
+          </div>
+          <nav aria-label="Footer">
+            <ul class="footer-menu">
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </footer>
+      -->
+
       <!-- Filled from footer.html by setup.js -->
-      <div id="footer-container"></div>
+      <div id="footer-container" class="overlaps-illustration"></div>
     </div>
   </body>
 </html>

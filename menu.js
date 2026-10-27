@@ -3,9 +3,16 @@
 var menuItems = document.querySelectorAll('li.has-submenu')
 var allTopMenuItems = document.querySelectorAll('.main-menu > li')
 
+// Tap-to-open version for the tablet/phone menu, kept for reference (uncomment together
+// with the matching CSS in styles.css and the commented lines below):
+// Hover opening only applies to the desktop menu; in the tablet/phone menu (≤1200px)
+// sections open on tap, and touch devices fire mouseenter right before the tap
+// var mobileMenuQuery = window.matchMedia('(max-width: 1200px)')
+
 // Close other submenus immediately when mouse enters any top-level menu item
 Array.prototype.forEach.call(allTopMenuItems, function (topItem) {
   topItem.addEventListener('mouseenter', function () {
+    // if (mobileMenuQuery.matches) return
     Array.prototype.forEach.call(menuItems, function (subItem) {
       if (subItem !== topItem) {
         subItem.classList.remove('open')
@@ -21,6 +28,7 @@ Array.prototype.forEach.call(allTopMenuItems, function (topItem) {
 // Iterate through each submenu item
 Array.prototype.forEach.call(menuItems, function (el, i) {
   el.addEventListener('mouseenter', function (event) {
+    // if (mobileMenuQuery.matches) return
     if (this.timer) {
       clearTimeout(this.timer)
       this.timer = null
@@ -29,6 +37,7 @@ Array.prototype.forEach.call(menuItems, function (el, i) {
   })
 
   el.addEventListener('mouseleave', function (event) {
+    // if (mobileMenuQuery.matches) return
     this.timer = setTimeout(() => {
       this.classList.remove('open')
     }, 120)
@@ -37,6 +46,11 @@ Array.prototype.forEach.call(menuItems, function (el, i) {
   // Add an event listener to the <a> element to toggle submenu visibility when clicked
   el.querySelector('a').addEventListener('click', function (event) {
     const parent = this.parentNode
+    // Tap-to-open version: in the tablet/phone menu (≤1200px) tapping a section only
+    // opens/closes its list; its pages are reachable as sub-items.
+    // if (mobileMenuQuery.matches) {
+    //   event.preventDefault()
+    // }
     if (parent.classList.contains('open')) {
       // If submenu is already open, close it and update the aria-expanded attribute
       parent.classList.remove('open')

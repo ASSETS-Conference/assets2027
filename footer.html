@@ -18,8 +18,69 @@
         <li>
           <a href="index.html">Home</a>
         </li>
-        <li><a href="attending.html">Venue</a></li>
-        <li><a href="organizers.html">Organizing Committee</a></li>
+        <!-- Unavailable items: no href, but focusable and announced as "to be announced" -->
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Authors<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Program<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+        <li>
+          <a href="attending.html">Attending</a>
+          <ul>
+            <li class="is-unavailable">
+              <a role="link" aria-disabled="true" tabindex="0"
+                >Registration<span class="sr-only">, to be announced</span></a
+              >
+            </li>
+            <li><a href="attending.html">Venue</a></li>
+            <li class="is-unavailable">
+              <a role="link" aria-disabled="true" tabindex="0"
+                >Workshops<span class="sr-only">, to be announced</span></a
+              >
+            </li>
+            <li class="is-unavailable">
+              <a role="link" aria-disabled="true" tabindex="0"
+                >Accessibility FAQ<span class="sr-only">, to be announced</span></a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="organizers.html">Organizing</a>
+          <ul>
+            <li><a href="organizers.html">Organizing Committee</a></li>
+            <li class="is-unavailable">
+              <a role="link" aria-disabled="true" tabindex="0"
+                >Subcommittees<span class="sr-only">, to be announced</span></a
+              >
+            </li>
+            <li class="is-unavailable">
+              <a role="link" aria-disabled="true" tabindex="0"
+                >Program Committee<span class="sr-only">, to be announced</span></a
+              >
+            </li>
+            <li class="is-unavailable">
+              <a role="link" aria-disabled="true" tabindex="0"
+                >Blog<span class="sr-only">, to be announced</span></a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Sponsors<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Volunteer<span class="sr-only">, to be announced</span></a
+          >
+        </li>
         <!-- Hidden until their 2027 content is ready:
         <li>
           <a href="call_for_papers.html">Authors</a>
@@ -81,6 +142,28 @@
         </li>
         <li><a href="volunteer.html" data-page="volunteer">Volunteer</a></li>
         <li><a href="#">Code of Conduct</a></li>
+        Older placeholders (from earlier ASSETS sites):
+        <li><a href="#">Overview</a></li>
+        <li><a href="#">Moving Around NYC</a></li>
+        <li><a href="#">Conference Venue Hotel</a></li>
+        <li><a href="#">Registration</a></li>
+        <li><a href="#">Diversity and Inclusion Scholarship</a></li>
+        <li><a href="#">Accessibility FAQ</a></li>
+        <li>
+          <a href="#">Program</a>
+          <ul>
+            <li><a href="#">Program</a></li>
+            <li><a href="#">Keynote Speaker</a></li>
+            <li><a href="#">Poster Session 1</a></li>
+            <li><a href="#">Poster Session 2</a></li>
+            <li><a href="#">Poster Session 3</a></li>
+            <li><a href="#">Demo Session</a></li>
+            <li><a href="#">Accepted Papers</a></li>
+            <li><a href="#">Accepted Workshops</a></li>
+            <li><a href="#">Accepted SRCs</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Awards</a></li>
         -->
       </ul>
     </nav>

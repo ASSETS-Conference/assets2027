@@ -13,8 +13,83 @@
 </button>
 <div id="menu-container">
   <ul class="main-menu">
-    <li><a href="attending.html" data-page="attending">Venue</a></li>
-    <li><a href="organizers.html" data-page="organizers">Organizing Committee</a></li>
+    <!-- Unavailable items: no href, but focusable and announced as "to be announced" -->
+    <li class="is-unavailable">
+      <a role="link" aria-disabled="true" tabindex="0"
+        >Authors<span class="sr-only">, to be announced</span></a
+      >
+    </li>
+    <li class="is-unavailable">
+      <a role="link" aria-disabled="true" tabindex="0"
+        >Program<span class="sr-only">, to be announced</span></a
+      >
+    </li>
+    <li class="has-submenu">
+      <a
+        href="attending.html"
+        aria-expanded="false"
+        aria-haspopup="true"
+        role="button"
+        data-page="attending"
+        >Attending</a
+      >
+      <ul class="secondary-menu">
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Registration<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+        <li><a href="attending.html">Venue</a></li>
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Workshops<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Accessibility FAQ<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+      </ul>
+    </li>
+    <li class="has-submenu">
+      <a
+        href="organizers.html"
+        aria-expanded="false"
+        aria-haspopup="true"
+        role="button"
+        data-page="organizers"
+        >Organizing</a
+      >
+      <ul class="secondary-menu">
+        <li><a href="organizers.html">Organizing Committee</a></li>
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Subcommittees<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Program Committee<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+        <li class="is-unavailable">
+          <a role="link" aria-disabled="true" tabindex="0"
+            >Blog<span class="sr-only">, to be announced</span></a
+          >
+        </li>
+      </ul>
+    </li>
+    <li class="is-unavailable">
+      <a role="link" aria-disabled="true" tabindex="0"
+        >Sponsors<span class="sr-only">, to be announced</span></a
+      >
+    </li>
+    <li class="is-unavailable">
+      <a role="link" aria-disabled="true" tabindex="0"
+        >Volunteer<span class="sr-only">, to be announced</span></a
+      >
+    </li>
     <!-- Hidden until their 2027 content is ready:
     <li class="mobile-only"><a href="index.html" data-page="home">Home</a></li>
     <li class="has-submenu">

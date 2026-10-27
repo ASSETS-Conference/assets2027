@@ -374,8 +374,8 @@ nav ul.main-menu > li {
 }
 
 nav ul.main-menu > li.selected-link {
-  background-color: rgba(255, 198, 0, 0.15);
-  border: 1px solid var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 @media screen and (max-width: 768px) {
   nav ul.main-menu > li.selected-link {
@@ -385,7 +385,7 @@ nav ul.main-menu > li.selected-link {
 
 nav ul.main-menu > li.selected-link > a {
   text-decoration: none;
-  color: var(--accent-color);
+  color: #ffffff;
 }
 
 @media only screen and (min-width: 768px) {
@@ -402,7 +402,7 @@ nav ul.main-menu > li.selected-link > a {
   }
 
   nav ul.main-menu > li.selected-link .submenu-toggle > span:before {
-    border-color: var(--accent-color);
+    border-color: #ffffff;
   }
 
   nav ul.main-menu > li:hover > a,
@@ -413,7 +413,7 @@ nav ul.main-menu > li.selected-link > a {
 
   nav ul.main-menu > li.selected-link > a {
     text-decoration: none;
-    color: var(--accent-color);
+    color: #ffffff;
   }
 }
 
@@ -424,7 +424,7 @@ nav ul.main-menu > li.selected-link > a {
   }
 
   nav ul.main-menu > li.selected-link > a {
-    color: var(--accent-color) !important;
+    color: #ffffff !important;
   }
 }
 
@@ -470,6 +470,22 @@ ul.main-menu li.open ul {
   transition: all 0s;
   visibility: visible;
   opacity: 1;
+}
+
+/* Unavailable (to be announced) items in header and footer menus */
+nav ul.main-menu > li.is-unavailable > a,
+nav ul.secondary-menu li.is-unavailable > a,
+.footer-menu li.is-unavailable > a {
+  color: color-mix(in srgb, var(--light-text), transparent 40%) !important;
+  cursor: not-allowed;
+}
+
+nav ul.main-menu > li.is-unavailable:hover,
+nav ul.secondary-menu li.is-unavailable > a:hover,
+nav ul.secondary-menu li.is-unavailable:hover > a {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  text-decoration: none;
 }
 
 .visually-hidden {
@@ -624,13 +640,13 @@ ul.main-menu li.open ul {
   /* Selected or open parent */
   nav ul.main-menu > li.open,
   nav ul.main-menu > li.selected-link {
-    background-color: rgba(255, 198, 0, 0.15);
-    border: 1px solid var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
   }
 
   nav ul.main-menu > li.open > a,
   nav ul.main-menu > li.selected-link > a {
-    color: var(--accent-color);
+    color: #ffffff;
     text-decoration: none;
   }
 
@@ -658,7 +674,7 @@ ul.main-menu li.open ul {
 
     nav ul.main-menu > li.open > a,
     nav ul.main-menu > li.selected-link > a {
-      color: var(--accent-color);
+      color: #ffffff;
     }
 
     nav ul.secondary-menu li a {
@@ -712,11 +728,41 @@ ul.main-menu li.open ul {
     padding-left: 1.25rem;
   }
 
+  /* Sub-menus are always expanded in the tablet/phone menu, marked with a '>' prefix */
   li.has-submenu > a:before {
     content: '>';
     display: inline-block;
     padding-right: 0.5ch;
   }
+
+  /* Tap-to-open version, kept for reference (also uncomment the matching code in menu.js):
+
+  Sub-menus start collapsed; tapping the section toggles .open (menu.js)
+  nav ul.main-menu > li.has-submenu > ul.secondary-menu {
+    display: none;
+  }
+
+  nav ul.main-menu > li.has-submenu.open > ul.secondary-menu {
+    display: flex;
+  }
+
+  Chevron after the section name: points down when closed, up when open
+  li.has-submenu > a:after {
+    content: '';
+    display: inline-block;
+    width: 0.45em;
+    height: 0.45em;
+    margin-left: 0.6ch;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-0.2em) rotate(45deg);
+    transition: transform 0.15s ease;
+  }
+
+  li.has-submenu.open > a:after {
+    transform: translateY(0.05em) rotate(-135deg);
+  }
+  */
 
   nav li,
   nav li a,
@@ -1389,6 +1435,11 @@ footer hr {
 .footer-menu a {
   color: var(--light-text);
   font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.footer-menu a[href]:hover {
+  text-decoration: underline;
 }
 
 .footer-menu li ul li {
@@ -1677,6 +1728,424 @@ ul.committee-members .members-name {
   font-weight: 500;
   font-size: 1.1rem;
   color: var(--accent-color2);
+}
+
+/* Organizing Committee page: full width (lined up with the logo, like the home page),
+   role + email in a left column, people in a wide grid on the right */
+.committee-page .grid-helper {
+  display: block;
+  margin-bottom: 0;
+}
+
+/* Breathing room between the last committee section and the footer */
+.committee-page {
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.committee-page .text-block {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.committee-page h1 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.committee-role,
+.venue-section {
+  /* Sakura divider (Organizing Committee roles, Venue sections): the flower shape
+     (from imgs/sakura-light.png, used as a mask) sits at the top-left and its stem is
+     continued by a line to the right edge, both in --sakura-color. Stem measured from
+     the 155x79 image: about 4.2px thick centred on row 43.5, ending in a rounded tip
+     at x = 145-155. */
+  --sakura-h: 56px;
+  /* Colour presets (swap the value to test):
+     #c4422e  deeper favicon coral (current, light mode: 3.85:1 on the beige background)
+     #f96f5c  favicon / footer-sun coral (current in dark mode below: 5.7:1 on navy)
+     #013950  header navy (light mode only; vanishes on the dark-mode navy)
+     #9ed0e6  light blue, like the dark-mode titles
+     #9b0033  crimson, the colour of imgs/sakura-light.png */
+  --sakura-color: #c4422e;
+
+  position: relative;
+  padding-top: calc(var(--sakura-h) + 1.5rem);
+}
+
+.committee-role {
+  display: grid;
+  /* Role heading on its own line, photos below centred across the page.
+     Previously the heading sat in a left column beside the photos:
+  grid-template-columns: minmax(12rem, 1fr) 3fr;
+  gap: 1.5rem 3rem;
+  */
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.committee-role::before,
+.committee-role::after,
+.venue-section::before,
+.venue-section::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Flower */
+.committee-role::before,
+.venue-section::before {
+  top: 0;
+  left: 0;
+  /* cut off before the image's rounded stem tip (x = 145 of 155); the line below takes over */
+  width: calc(var(--sakura-h) * 145 / 79);
+  height: var(--sakura-h);
+  background-color: var(--sakura-color);
+  -webkit-mask: url('imgs/sakura-light.png') left top / calc(var(--sakura-h) * 155 / 79) var(--sakura-h)
+    no-repeat;
+  mask: url('imgs/sakura-light.png') left top / calc(var(--sakura-h) * 155 / 79) var(--sakura-h)
+    no-repeat;
+}
+
+/* Stem continued to the right edge, overlapping the end of the image's stem so there is no seam */
+.committee-role::after,
+.venue-section::after {
+  top: calc(var(--sakura-h) * 41.4 / 79);
+  left: calc(var(--sakura-h) * 135 / 79);
+  right: 0;
+  height: calc(var(--sakura-h) * 4.2 / 79);
+  background-color: var(--sakura-color);
+  border-radius: 999px;
+}
+
+/* Dark mode: the favicon coral itself */
+@media (prefers-color-scheme: dark) {
+  .committee-role,
+  .venue-section {
+    /* was #031824 (dark header navy), too faint on the navy background */
+    --sakura-color: #f96f5c;
+  }
+}
+
+/* Soft sakura pink was tried here before:
+@media (prefers-color-scheme: dark) {
+  .committee-role {
+    --sakura-color: #f0a6ba;
+  }
+}
+*/
+
+.committee-role .role-info h2 {
+  margin: 0 0 0.5rem;
+}
+
+.committee-role .role-info p {
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere; /* long email addresses wrap instead of overflowing */
+}
+
+/* Photos keep their previous size (about 330px); as many per row as fit. A wrapping flex row
+   centres every row, including a leftover photo on its own line (e.g. 3 people, 2 per row).
+   Earlier grid versions, kept for reference:
+   grid-template-columns: repeat(auto-fill, 18.5rem);
+   grid-template-columns: repeat(auto-fit, 18.5rem); justify-content: center; */
+.committee-page ul.committee-members {
+  display: flex;
+  flex-direction: row; /* .text-block ul sets column */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.committee-page ul.committee-members li {
+  padding: 0;
+  gap: 0.75rem;
+  width: 18.5rem;
+}
+
+/* Photo outline in the header colour, darker than the page background */
+.committee-page ul.committee-members img,
+.committee-page .img-placeholder {
+  box-sizing: border-box;
+  border: 4px solid var(--nav-bg-color);
+}
+
+.committee-page .affiliation {
+  font-size: 0.95rem;
+  font-style: normal;
+}
+
+/* Names bold and upright (the shared style elsewhere is italic, weight 500) */
+.committee-page ul.committee-members .members-name {
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* No longer needed now that every row is centred (it centred a single photo across all
+   slots, which on wide laptops didn't line up with the pairs):
+@media screen and (min-width: 769px) {
+  .committee-page ul.committee-members > li:only-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 18.5rem;
+  }
+}
+*/
+
+/* Tablets and phones: role heading above its people, one full-width photo per row (as before) */
+@media screen and (max-width: 768px) {
+  .committee-role,
+  .venue-section {
+    --sakura-h: 48px;
+    padding-top: calc(var(--sakura-h) + 1.25rem);
+  }
+
+  .committee-role {
+    grid-template-columns: 1fr;
+    padding-bottom: 2rem;
+  }
+
+  .committee-role .role-info h2 {
+    font-size: 1.3rem;
+  }
+
+  .committee-page ul.committee-members {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .committee-page ul.committee-members li {
+    width: 100%;
+  }
+}
+
+/* Venue page: full width (lined up with the logo, like the home and committee pages),
+   text in light boxes like the home page, sakura dividers between sections */
+.venue-page {
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.venue-page h1 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Full-width photo: no box border or rounded corners */
+.venue-page .highlighted-block.image-container {
+  border: none !important;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent !important;
+  margin-block: 2.5rem; /* photo now sits between the intro box and the address box */
+}
+
+.venue-page #venue-img {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 40vw, 620px);
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+/* Full-width cut-out tests, no longer used (the cut-out now sits in the intro box):
+   1) within the photo strip height (narrower, centred):
+  object-fit: contain;
+  object-position: center bottom;
+   2) full page width at its natural proportions (too big):
+.venue-page #venue-img.venue-img-cutout {
+  height: auto;
+  object-fit: fill;
+}
+*/
+
+/* Building cut-out (transparent background) in the top-right corner of the intro box,
+   overlapping the box's top edge a little. Laptops only; hidden on tablet/phone. */
+.venue-page .venue-intro {
+  position: relative;
+}
+
+@media only screen and (min-width: 1201px) {
+  /* (same specificity as the .venue-box padding rule, plus one, so this padding wins) */
+  .venue-page .text-block.venue-box.venue-intro {
+    --building-w: min(30%, 26rem);
+    padding-right: calc(var(--building-w) + 3rem);
+  }
+
+  .venue-page .venue-intro-building {
+    --building-w: min(30%, 26rem);
+    position: absolute;
+    top: -3.5rem;
+    right: 2rem;
+    width: var(--building-w);
+    height: auto;
+    pointer-events: none;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .venue-page .venue-intro-building {
+    display: none;
+  }
+}
+
+/* Light text boxes, same look as the home page boxes (beige / lighter blue in dark mode) */
+.venue-page .text-block.venue-box {
+  grid-column: auto;
+  background-color: var(--box-bg);
+  color: var(--box-text-color);
+  border-radius: 0;
+  padding: 40px;
+  box-shadow: 0 8px 24px rgba(0, 59, 79, 0.16);
+}
+
+.venue-page .venue-box h2,
+.venue-page .venue-box h3,
+.venue-page .venue-box p,
+.venue-page .venue-box li,
+.venue-page .venue-box strong {
+  color: var(--box-text-color);
+}
+
+.venue-page .venue-box h2 {
+  margin: 0 0 1rem;
+}
+
+.venue-page .venue-box h3 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.venue-page .venue-box > h3:first-child {
+  margin-top: 0;
+}
+
+.venue-page .venue-box p {
+  padding: 0;
+  margin: 0 0 0.9rem;
+}
+
+/* Avoid a single word alone on the last line (browsers that support it; the HTML also
+   joins the last two words of each paragraph with &nbsp; for the others) */
+.venue-page p,
+.venue-page li {
+  text-wrap: pretty;
+}
+
+.venue-page .venue-box > :last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .venue-page .text-block.venue-box {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Section headings and intro text sit on the page, the details in boxes */
+.venue-section {
+  margin-top: 3rem;
+}
+
+.venue-section > h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.venue-section > p {
+  padding: 0;
+  margin: 0 0 0.75rem;
+  /* max-width: 70ch; (cut the intro lines in two; intros now sit in full-width boxes) */
+}
+
+/* Section heading with an icon (train, airplane) */
+.venue-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+/* Black line icons used as a mask so they take the text colour of each mode:
+   dark blue on the light background, light blue on the dark background */
+.venue-icon {
+  --venue-icon-color: #013950;
+  flex: none;
+  width: 1.6em;
+  height: 1.6em;
+  background-color: var(--venue-icon-color);
+  -webkit-mask: var(--venue-icon) center / contain no-repeat;
+  mask: var(--venue-icon) center / contain no-repeat;
+}
+
+.venue-icon-train {
+  --venue-icon: url('imgs/assets-27-venue/train.png');
+}
+
+.venue-icon-airplane {
+  --venue-icon: url('imgs/assets-27-venue/airplane-mode.png');
+}
+
+@media (prefers-color-scheme: dark) {
+  .venue-icon {
+    --venue-icon-color: #9ed0e6;
+  }
+}
+
+.venue-section > .venue-box,
+.venue-cards {
+  margin-top: 1.5rem;
+}
+
+/* Full-width horizontal panels, one below the other.
+   Previously side by side on wide screens:
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+*/
+.venue-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* Lists with the sakura favicon as bullet (decorative; still announced as a list) */
+.venue-page ul.sakura-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.venue-page ul.sakura-list li {
+  position: relative;
+  padding-left: 1.6em;
+}
+
+.venue-page ul.sakura-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 1.05em;
+  height: 1.05em;
+  background: url('imgs/favicon-assets.png') center / contain no-repeat;
+}
+
+@media screen and (max-width: 768px) {
+  .venue-page .text-block.venue-box {
+    padding: clamp(20px, 4vw, 24px);
+  }
 }
 
 ul.pc-members,
@@ -3597,6 +4066,66 @@ svg {
   max-width: 100%;
 }
 
+/* Unused: old TBA-mode logo-only header and landing footer, kept for reference
+   (the landing page now uses the shared menu.html / footer.html).
+
+Logo-only landing page header, padded like .title-row-container:
+.site-header {
+  --menu-height: 4.5rem;
+
+  position: relative;
+  z-index: 50;
+  min-height: var(--menu-height);
+  padding: 0 max(2rem, 4vw);
+  box-sizing: border-box;
+  background-color: var(--nav-bg-color);
+  box-shadow: 0 4px 24px 0 rgba(1, 57, 80, 0.35);
+}
+
+.site-header > a {
+  display: flex;
+  width: fit-content;
+  height: var(--menu-height);
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-header {
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.4);
+    background-color: #1a1f2b;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .site-header {
+    --menu-height: 3.75rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .site-header {
+    padding: 0 max(1rem, 3vw);
+  }
+}
+
+.site-header a:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+Landing page had no footer illustration to overlap:
+.landing-footer {
+  margin-top: 0 !important;
+}
+
+Keep the lone footer link at least 24px tall (WCAG 2.5.8 target size):
+.landing-footer .footer-menu a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+*/
+
 /* Text read by screen readers but not shown on screen */
 .sr-only {
   position: absolute;
@@ -3728,11 +4257,12 @@ h2.event-info {
   display: block;
 }
 
-/* 'Check out the venue' button: 5px radius, overlapping top right on desktop */
+/* 'Check out the venue' button: 5px radius, overlapping top right on desktop,
+   right edge lined up with the title row text (same side padding) */
 .venue-btn {
   position: absolute;
   top: 0;
-  right: 0;
+  right: max(2rem, 4vw);
   transform: translateY(-50%);
   z-index: 20;
   display: inline-flex;
@@ -3888,10 +4418,73 @@ h2.event-info {
   background-color: transparent;
 }
 
+/* Volunteer announcement: square box like the description box, no outline, with shadow */
+.announcement-wrapper {
+  position: relative;
+  margin-bottom: calc(2.5rem + 32px); /* room for the button overlapping the bottom edge */
+}
+
+.description-box-container #announcement-block {
+  background-color: var(--box-bg);
+  color: var(--box-text-color);
+  border: none;
+  border-radius: 0;
+  padding: 40px 40px 56px; /* extra bottom space so the overlapping button clears the text */
+  margin: 0;
+  box-shadow: 0 8px 24px rgba(0, 59, 79, 0.16);
+}
+
+.description-box-container #announcement-block h3 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--box-text-color);
+  margin: 0 0 0.75rem;
+}
+
 .description-box-container #announcement-block p {
   font-family: 'Atkinson Hyperlegible', sans-serif;
   font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--box-text-color);
+  margin: 0;
   padding: 0;
+}
+
+/* Interest form button: same look as the venue button, overlapping the box's bottom-right edge */
+.interest-btn {
+  top: auto;
+  bottom: 0;
+  right: 0;
+  transform: translateY(50%);
+}
+
+.interest-btn:hover {
+  transform: translateY(calc(50% - 2px));
+}
+
+@media (prefers-color-scheme: dark) {
+  .description-box-container #announcement-block {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .description-box-container #announcement-block {
+    padding: clamp(20px, 4vw, 24px);
+  }
+}
+
+/* On phones the button sits below the box, like the venue button */
+@media only screen and (max-width: 700px) {
+  .announcement-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .interest-btn,
+  .interest-btn:hover {
+    transform: none;
+  }
 }
 
 /* Decorative footer illustration as background layer on desktop */
@@ -3950,13 +4543,22 @@ h2.event-info {
 footer {
   position: relative;
   z-index: 2;
+  /* Previously every page's footer overlapped the content above it, which hid the end
+     of content pages; now only the home page overlaps (its footer illustration):
   margin-top: calc(-1 * var(--footer-overlap)) !important;
+  */
+  margin-top: 0 !important;
   margin-bottom: 0;
   padding-bottom: 2rem;
   min-height: auto;
   background-color: var(--footer-color) !important;
   color: white;
   overflow: hidden;
+}
+
+/* Home page: footer slides up over the bottom of the footer illustration */
+#footer-container.overlaps-illustration footer {
+  margin-top: calc(-1 * var(--footer-overlap)) !important;
 }
 
 @media only screen and (max-width: 900px) {
