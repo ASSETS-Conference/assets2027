@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="theme-navy">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,40 +15,21 @@
     <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-assets.png" />
     <!-- Preload stylesheets -->
     <link rel="preload" href="reset.css" as="style" />
-    <link rel="preload" href="styles.css?v=19" as="style" />
+    <link rel="preload" href="styles.css?v=20" as="style" />
 
     <!-- Load stylesheets -->
     <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="styles.css?v=19" />
+    <link rel="stylesheet" href="styles.css?v=20" />
 
-    <script
-      defer
-      src="https://cloud.umami.is/script.js"
-      data-website-id="e2f681f9-0ef5-4e7c-98b9-e3f2316e9125"
-    ></script>
-    <script src="pattern.js?v=2" defer></script>
+    <link rel="preload" href="setup.js?v=COMMIT_HASH" as="script" />
+    <script src="setup.js?v=COMMIT_HASH" defer></script>
+    <script src="pattern.js?v=3" defer></script>
   </head>
-  <!-- TBA MODE: remove "tba-mode" from body to restore header, full landing content and footer -->
-  <body class="tba-mode">
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div id="page-wrapper" class="page-wrapper">
-      <header class="site-header">
-        <a href="index.html"
-          ><picture id="nav-logo">
-            <source srcset="imgs/logo.svg" media="(prefers-color-scheme: dark)" />
-            <img src="imgs/logo.svg" alt="ASSETS 2027, home" /> </picture
-        ></a>
-      </header>
-      <main id="main-content">
-        <!-- "To be announced" placeholder, only shown in TBA mode -->
-        <section class="tba-hero" aria-labelledby="tba-title">
-          <h1 id="tba-title" class="tba-title">
-            ASSETS 2027<span class="sr-only">: the 29th International ACM SIGACCESS Conference on Computers and Accessibility</span>
-          </h1>
-          <p class="tba-subtitle">To be announced</p>
-        </section>
-
-        <!-- Full landing content, hidden in TBA mode -->
-        <div class="landing-full">
+      <nav id="nav-container" data-active="home" aria-label="Main"></nav>
+      <main id="main-content" tabindex="-1">
         <!-- Title Row lining up with header logo and side padding -->
         <div class="title-row-container">
           <div class="title-row">
@@ -57,17 +38,22 @@
               Computers and Accessibility
             </h1>
             <div class="event-info-container">
-              <h2 class="event-info"><span class="sr-only">Location: </span>To be announced<br />October 24—27 2027</h2>
+              <h2 class="event-info">Tokyo, Japan<br />October 24—27 2027</h2>
             </div>
           </div>
         </div>
 
-        <!-- Panorama image -->
+        <!-- Panorama image with 'Check out the venue' button -->
         <div class="panorama-section">
-          <img src="imgs/hero-banner.png" alt="Panoramic view of a bay with a suspension bridge and a city skyline" id="hero-banner-img" />
+          <img
+            src="imgs/hero-banner.png"
+            alt="Panoramic view of Tokyo Bay on a clear day: the Rainbow Bridge spans the water in the centre, with the Tokyo city skyline behind it, a curving elevated highway and two tall towers on the left, and a waterfront promenade with palm trees on the right."
+            id="hero-banner-img"
+          />
+          <a href="attending.html" class="venue-btn">Check out the venue</a>
         </div>
 
-        <!-- Description box -->
+        <!-- Section wrapping Description Box and Footer Illustration as background layer -->
         <section class="description-footer-section">
           <div class="description-box-container">
             <!-- Main description box -->
@@ -87,30 +73,17 @@
               </p>
             </div>
           </div>
+
+          <!-- Decorative footer illustration (dark version in dark mode), background layer at the bottom of this section -->
+          <picture class="footer-illustration-bg" aria-hidden="true">
+            <source srcset="imgs/footer-illustration-dark.png" media="(prefers-color-scheme: dark)" />
+            <img src="imgs/footer-illustration.png" alt="" />
+          </picture>
         </section>
-        </div>
       </main>
 
-      <div id="footer-container">
-        <footer class="landing-footer">
-          <div class="content-block-container">
-            <div class="grid-helper">
-              <picture class="grid-item">
-                <source srcset="imgs/logo.svg" media="(prefers-color-scheme: dark)" />
-                <img src="imgs/logo.svg" alt="ASSETS 2027" />
-              </picture>
-              <hr class="span12c grid-item" />
-            </div>
-            <nav aria-label="Footer">
-            <ul class="footer-menu">
-              <li>
-                <a href="index.html">Home</a>
-              </li>
-            </ul>
-          </nav>
-          </div>
-        </footer>
-      </div>
+      <!-- Filled from footer.html by setup.js -->
+      <div id="footer-container"></div>
     </div>
   </body>
 </html>
