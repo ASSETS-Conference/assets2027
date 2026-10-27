@@ -15,11 +15,11 @@
     <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-assets.png" />
     <!-- Preload stylesheets -->
     <link rel="preload" href="reset.css" as="style" />
-    <link rel="preload" href="styles.css?v=19" as="style" />
+    <link rel="preload" href="styles.css?v=20" as="style" />
 
     <!-- Load stylesheets -->
     <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="styles.css?v=19" />
+    <link rel="stylesheet" href="styles.css?v=20" />
 
     <script
       defer
@@ -28,8 +28,8 @@
     ></script>
     <script src="pattern.js?v=2" defer></script>
   </head>
-  <!-- TBA MODE: remove "tba-mode" from body to restore header, full landing content and footer -->
-  <body class="tba-mode">
+  <!-- Full landing page. Add class "tba-mode" to body to show only "ASSETS 2027 / To be announced". -->
+  <body>
     <div id="page-wrapper" class="page-wrapper">
       <header class="site-header">
         <a href="index.html"
@@ -70,6 +70,15 @@
         <!-- Description box -->
         <section class="description-footer-section">
           <div class="description-box-container">
+            <div id="announcement-block" class="highlighted-block" role="region" aria-labelledby="announcement-title">
+              <h3 id="announcement-title">Join us in organizing ASSETS 2027!</h3>
+              <p>
+                We're looking for volunteers to help organize ASSETS 2027. If you're interested in
+                getting involved, please fill out our
+                <a href="https://docs.google.com/forms/d/1obDXB_0xKciTlPMm4JKiCPWAVxtRcmlYj7gyxSd_ehU/viewform">interest form</a>.
+              </p>
+            </div>
+
             <!-- Main description box -->
             <div class="main-description-box" role="region" aria-label="About ASSETS">
               <p>

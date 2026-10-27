@@ -3869,6 +3869,12 @@ h2.event-info {
   background-color: transparent;
 }
 
+.description-box-container #announcement-block p {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 1.05rem;
+  padding: 0;
+}
+
 @media only screen and (max-width: 900px) {
   .description-footer-section {
     overflow: visible;
