@@ -4463,6 +4463,40 @@ h2.event-info {
   transform: translateY(calc(50% - 2px));
 }
 
+/* Sponsorship page: the contact button now uses the home page pattern
+   (.announcement-wrapper + .venue-btn.interest-btn). Earlier in-box version, kept for reference:
+.venue-btn.sponsor-contact-btn {
+  position: static;
+  transform: none;
+  margin-top: 0.5rem;
+  width: fit-content;
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+
+.venue-btn.sponsor-contact-btn:hover {
+  transform: translateY(-2px);
+}
+
+@media only screen and (max-width: 700px) {
+  .venue-btn.sponsor-contact-btn {
+    margin: 0.5rem 0 0;
+  }
+}
+*/
+
+/* Room for the overlapping button below the text, like the home page box */
+.venue-page .announcement-wrapper > .text-block.venue-box {
+  padding-bottom: 56px;
+}
+
+@media only screen and (max-width: 700px) {
+  .venue-page .announcement-wrapper > .text-block.venue-box {
+    padding-bottom: clamp(20px, 4vw, 24px);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .description-box-container #announcement-block {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
