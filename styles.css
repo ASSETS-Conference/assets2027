@@ -1261,7 +1261,7 @@ ul + p {
      aspect-ratio so the full native resolution is always used. */
   height: auto;
   max-height: clamp(280px, 36vw, 620px);
-  aspect-ratio: 2940 / 1044; /* match the actual pixel dimensions of hero-banner.png */
+  aspect-ratio: 2940 / 1044; /* match the actual pixel dimensions of hero-banner.webp */
   object-fit: cover;
   object-position: center;
   display: block;
